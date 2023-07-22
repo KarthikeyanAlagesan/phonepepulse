@@ -12,7 +12,7 @@
 
 This approach leverages the power of Python and its numerous libraries to extract, transform, and analyze data, and to create a user-friendly dashboard for visualizing the insights obtained from the data.
 
-#Top charts#  
+**Top charts**  
 Transactions
 ![image](https://github.com/KarthikeyanAlagesan/phonepepulse/assets/137781936/beb73dde-0305-4a10-b721-ad4445ed9cfe)
 
@@ -23,7 +23,7 @@ Users
 ![image](https://github.com/KarthikeyanAlagesan/phonepepulse/assets/137781936/41bcf94f-dc52-43a3-a7ca-8c0927baa0f1)
 
 
-#Explore_data#
+**Explore_data**
 
 Transactions
 
