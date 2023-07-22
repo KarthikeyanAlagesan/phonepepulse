@@ -1,13 +1,13 @@
 import pandas as pd
-#from sklearn.preprocessing import LabelEncoder
-#import numpy as np
-#import requests
+from sklearn.preprocessing import LabelEncoder
+import numpy as np
+import requests
 import json
 import os
 import mysql.connector as mysql
-#from mysql.connector import Error
-#import streamlit as st
-#import plotly.express as px
+from mysql.connector import Error
+import streamlit as st
+import plotly.express as px
 
 path=r"C:/Users/karth/OneDrive/Desktop/phone_pe/pulse-master/data/aggregated/transaction/country/india/state/"
 Agg_state=os.listdir(path)
@@ -33,9 +33,9 @@ for i in Agg_state:
                    Z["Year"].append(row)
                    Z["Quarter"].append(int(k.strip('.json')))
 df=pd.DataFrame(Z)
-df.to_csv('Agg_trans.csv')
+df.to_csv('Agg_trans.csv',index=False)
 
-path=r"C:/Users/karth/OneDrive/Desktop/phone_pe/pulse-master/data/aggregated/transaction/country/india/state/"
+path=r"C:/Users/karth/OneDrive/Desktop/phone_pe/pulse-master/data/aggregated/user/country/india/state/"
 Agg_state=os.listdir(path)
 Z2={'State':[], 'Year':[],'Quarter':[],'Brand':[], 'count':[], 'Percentage':[]}
 for i in Agg_state:
@@ -60,7 +60,7 @@ for i in Agg_state:
             except:
                      pass
 df2=pd.DataFrame(Z2)
-df2.to_csv("user_by_device.csv")
+df2.to_csv("user_by_device.csv",index=False)
 
 
 path=r"C:/Users/karth/OneDrive/Desktop/phone_pe/pulse-master/data/map/transaction/hover/country/india/state/"
@@ -87,7 +87,7 @@ for i in hover_state:
                    Z3["Year"].append(row)
                    Z3["Quarter"].append(int(k.strip('.json')))
 df3=pd.DataFrame(Z3)
-df3.to_csv("map_trans.csv")
+df3.to_csv("map_trans.csv",index=False)
 path=r"C:/Users/karth/OneDrive/Desktop/phone_pe/pulse-master/data/map/user/hover/country/india/state/"
 hover_state=os.listdir(path)
 Z4={'State':[], 'Year':[],'Quarter':[],'Users':[], 'Districts':[],'App_opens':[]}
@@ -112,7 +112,7 @@ for i in hover_state:
                    Z4["Year"].append(row)
                    Z4["Quarter"].append(int(k.strip('.json')))
 df4=pd.DataFrame(Z4)
-df4.to_csv('map_user_state.csv')
+df4.to_csv('map_user_state.csv',index=False)
 
 path=r"C:/Users/karth/OneDrive/Desktop/phone_pe/pulse-master/data/top/transaction/country/india/state/"
 top_states=os.listdir(path)
@@ -141,7 +141,7 @@ for i in top_states:
                 Z5["Quarter"].append(int(k.strip('.json')))
 
 df5=pd.DataFrame(Z5)
-df5.to_csv("top_trans_state.csv")
+df5.to_csv("top_trans_state.csv",index=False)
 
 path=r"C:/Users/karth/OneDrive/Desktop/phone_pe/pulse-master/data/top/user/country/india/state/"
 top_states=os.listdir(path)
@@ -166,7 +166,7 @@ for i in top_states:
                 Z6["Quarter"].append(int(k.strip('.json')))
 
 df6=pd.DataFrame(Z6)
-df6.to_csv("top_user_state.csv")
+df6.to_csv("top_user_state.csv",index=False)
 
 mydb = mysql.connect(host="localhost",
                    user="root",
@@ -205,10 +205,10 @@ for i,row in df3.iterrows():
     mydb.commit()
 
 
-mycursor.execute("create table map_useres (State varchar(100), Year int, Quarter int, Registered_user int,District varchar(100), App_opens int)")
+mycursor.execute("create table map_users (State varchar(100), Year int, Quarter int, Registered_user int,District varchar(100), App_opens int)")
 
 for i,row in df4.iterrows():
-    sql = "INSERT INTO map_useres VALUES (%s,%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO map_users VALUES (%s,%s,%s,%s,%s,%s)"
     mycursor.execute(sql, tuple(row))
     mydb.commit()
 
@@ -220,10 +220,10 @@ for i,row in df5.iterrows():
     mycursor.execute(sql, tuple(row))
     mydb.commit()
 
-mycursor.execute("create table top_user1 (State varchar(100), Year int, Quarter int, Districts varchar(100) , Registered_users int)")
+mycursor.execute("create table top_user (State varchar(100), Year int, Quarter int, Districts varchar(100) , Registered_users int)")
 
 for i,row in df6.iterrows():
-    sql = "INSERT INTO top_user1 VALUES (%s,%s,%s,%s,%s)"
+    sql = "INSERT INTO top_user VALUES (%s,%s,%s,%s,%s)"
     mycursor.execute(sql, tuple(row))
     mydb.commit()
     
@@ -233,8 +233,3 @@ result=mycursor.fetchall()
 for i in result:
     print(i)
     
-    
-
-                                      
-                   
-   
